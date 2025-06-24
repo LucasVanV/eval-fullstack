@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { getAllCandidat } from '../../utils/api';
+    import { deleteCandidat, getAllCandidat } from '../../utils/api';
     import type { Candidat } from '../../types';
     import { goto } from '$app/navigation';
 
@@ -24,7 +24,8 @@
 
     function supprimerCandidat(id: number) {
         if (confirm("Supprimer ce candidat ?")) {
-            // Ajoute ici l'appel à ton API pour supprimer, puis refresh la liste
+            deleteCandidat(id);
+            window.location.reload();
         }
     }
 </script>

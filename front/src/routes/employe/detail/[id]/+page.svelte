@@ -66,6 +66,9 @@
             window.location.reload();
         }
     }
+
+    let showConges = false;
+    let showAbsences = false;
 </script>
 
 <h1 class="text-3xl font-bold mb-4">Détails de l'employé</h1>
@@ -101,59 +104,75 @@
         </tbody>
     </table>
 
-    <div class="bg-blue-100 rounded p-4 mb-4">
-        <div class="font-semibold mb-2">Congés ({employe.conges?.length ?? 0})</div>
-        <table class="w-full">
-            <thead>
-                <tr>
-                    <th class="text-left">Début</th>
-                    <th class="text-left">Fin</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#if employe.conges && employe.conges.length > 0}
-                    {#each employe.conges as conge}
-                        <tr>
-                            <td>{conge.dateDebut}</td>
-                            <td>{conge.dateFin}</td>
-                        </tr>
-                    {/each}
-                {:else}
+    <div
+        class="bg-blue-100 rounded p-4 mb-4 cursor-pointer select-none"
+        on:click={() => showConges = !showConges}
+    >
+        <div class="font-semibold mb-2 flex items-center gap-2">
+            <span>Congés ({employe.conges?.length ?? 0})</span>
+            <span>{showConges ? '▲' : '▼'}</span>
+        </div>
+        {#if showConges}
+            <table class="w-full mt-2">
+                <thead>
                     <tr>
-                        <td colspan="2" class="italic text-gray-500">Aucun congé</td>
+                        <th class="text-left">Début</th>
+                        <th class="text-left">Fin</th>
                     </tr>
-                {/if}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {#if employe.conges && employe.conges.length > 0}
+                        {#each employe.conges as conge}
+                            <tr>
+                                <td>{conge.dateDebut}</td>
+                                <td>{conge.dateFin}</td>
+                            </tr>
+                        {/each}
+                    {:else}
+                        <tr>
+                            <td colspan="2" class="italic text-gray-500">Aucun congé</td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        {/if}
     </div>
-    <div class="bg-blue-100 rounded p-4">
-        <div class="font-semibold mb-2">Absences ({employe.absences?.length ?? 0})</div>
-        <table class="w-full">
-            <thead>
-                <tr>
-                    <th class="text-left">Jour</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#if employe.absences && employe.absences.length > 0}
-                    {#each employe.absences as absence}
-                        <tr>
-                            <td>{absence.jour}</td>
-                        </tr>
-                    {/each}
-                {:else}
+
+    <div
+        class="bg-blue-100 rounded p-4 cursor-pointer select-none"
+        on:click={() => showAbsences = !showAbsences}
+    >
+        <div class="font-semibold mb-2 flex items-center gap-2">
+            <span>Absences ({employe.absences?.length ?? 0})</span>
+            <span>{showAbsences ? '▲' : '▼'}</span>
+        </div>
+        {#if showAbsences}
+            <table class="w-full mt-2">
+                <thead>
                     <tr>
-                        <td class="italic text-gray-500">Aucune absence</td>
+                        <th class="text-left">Jour</th>
                     </tr>
-                {/if}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {#if employe.absences && employe.absences.length > 0}
+                        {#each employe.absences as absence}
+                            <tr>
+                                <td>{absence.jour}</td>
+                            </tr>
+                        {/each}
+                    {:else}
+                        <tr>
+                            <td class="italic text-gray-500">Aucune absence</td>
+                        </tr>
+                    {/if}
+                </tbody>
+            </table>
+        {/if}
     </div>
 {:else}
     <div>Chargement...</div>
 {/if}
 
-<!-- Modale Congé -->
 {#if showCongeModal}
     <div class="fixed inset-0 bg-black bg-opacity-40 backdrop-blur flex items-center justify-center z-50">
         <div class="bg-white rounded shadow-lg p-6 w-full max-w-md">
@@ -174,7 +193,6 @@
     </div>
 {/if}
 
-<!-- Modale Absence -->
 {#if showAbsenceModal}
     <div class="fixed inset-0 bg-black bg-opacity-40 backdrop-blur flex items-center justify-center z-50">
         <div class="bg-white rounded shadow-lg p-6 w-full max-w-md">

@@ -5,7 +5,6 @@
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
 
-    // Récupère l'id depuis l'URL (ex: /employe/edit/3)
     const id = Number(get(page).params.id);
 
     async function handleSubmit(event: CustomEvent<{ employe: any }>) {

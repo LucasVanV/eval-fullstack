@@ -20,7 +20,6 @@
 
     const dispatch = createEventDispatcher();
 
-    // Pré-remplissage si id fourni
     onMount(async () => {
         if (id !== undefined) {
             const data = await getCandidatById(id);
@@ -69,7 +68,7 @@
         </div>
         <div>
             <label class="block mb-1 font-semibold" for="candidat-evaluation">Évaluation</label>
-            <input id="candidat-evaluation" type="number" min="0" max="20" class="w-full border rounded px-3 py-2" bind:value={candidat.evaluation} required/>
+            <input id="candidat-evaluation" type="number" min="0" max="10" class="w-full border rounded px-3 py-2" bind:value={candidat.evaluation} required/>
         </div>
         <div>
             <label class="block mb-1 font-semibold" for="candidat-dateEntretien">Date entretien</label>

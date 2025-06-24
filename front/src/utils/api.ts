@@ -24,7 +24,6 @@ export async function apiFetch<T>(
 		throw new Error(errorText || 'Erreur API');
 	}
 	const data = await res.json();
-	console.log('data', data);
 	return data;
 }
 
@@ -69,7 +68,6 @@ export function createConge(employeId: number, dateDebut: string, dateFin: strin
 	});
 }
 
-//
 export function getAllCandidat() {
 	return apiFetch<Candidat[]>('/candidats');
 }

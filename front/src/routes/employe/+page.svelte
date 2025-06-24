@@ -36,7 +36,7 @@
     class="mb-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
     on:click={ajouterEmploye}
 >
-    + Ajouter un employé
+    Ajouter un employé
 </button>
 <table class="min-w-full bg-white rounded shadow">
     <thead>

@@ -21,7 +21,6 @@
 
     const dispatch = createEventDispatcher();
 
-    // Si un id est passé, on va chercher l'employé et on pré-remplit
     onMount(async () => {
         if (id !== undefined) {
             const data = await getEmployeById(id);
